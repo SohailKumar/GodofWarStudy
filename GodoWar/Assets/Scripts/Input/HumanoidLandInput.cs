@@ -14,6 +14,8 @@ public class HumanoidLandInput : MonoBehaviour
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         input = new InputActions();
         input.HumanoidLand.Enable();
 
@@ -33,6 +35,8 @@ public class HumanoidLandInput : MonoBehaviour
         input.HumanoidLand.Look.canceled -= SetLook;
 
         input.HumanoidLand.Disable();
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void SetMove(InputAction.CallbackContext ctx)

@@ -8,12 +8,14 @@ public class HumanoidLandController : MonoBehaviour
     
     [SerializeField] HumanoidLandInput input;
 
-    Vector3 playerMoveInput;
+    [SerializeField] Vector3 playerMoveInput;
 
     Vector3 playerLookInput;
     Vector3 previousPlayerLookInput;
     float cameraPitch;
     [SerializeField] float playerLookInputLerpTime = 0.35f;
+
+    [SerializeField] Transform playerModelRotation;
 
     [Header("Movement")]
     [SerializeField] float movementMultiplier = 30.0f;
@@ -46,6 +48,8 @@ public class HumanoidLandController : MonoBehaviour
     private void PlayerLook()
     {
         rb.rotation = Quaternion.Euler(0.0f, rb.rotation.eulerAngles.y + (playerLookInput.x * rotationSpeedMultiplier), 0.0f);
+        Vector3 newMoveInput = playerMoveInput + transform.position + CameraFollow.rotation.eulerAngles;
+        playerModelRotation.rotation = Quaternion.LookRotation(playerMoveInput);
     }
 
     private void PitchCamera()
