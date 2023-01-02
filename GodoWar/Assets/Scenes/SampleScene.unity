@@ -260,11 +260,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 296443519}
+    m_TransformParent: {fileID: 457437294}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0af46e2ec24cba3448b67b3054f88f73, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0af46e2ec24cba3448b67b3054f88f73, type: 3}
       propertyPath: m_LocalScale.x
@@ -296,15 +296,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0af46e2ec24cba3448b67b3054f88f73, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0af46e2ec24cba3448b67b3054f88f73, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0af46e2ec24cba3448b67b3054f88f73, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0af46e2ec24cba3448b67b3054f88f73, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -617,7 +617,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 89801096}
   - {fileID: 1308277013}
   m_Father: {fileID: 457437294}
   m_RootOrder: 0
@@ -638,7 +637,7 @@ MonoBehaviour:
   input: {fileID: 1868095391}
   playerMoveInput: {x: 0, y: 0, z: 0}
   playerLookInputLerpTime: 0.35
-  playerModelRotation: {fileID: 89801096}
+  playerModelTransform: {fileID: 0}
   movementMultiplier: 2400
   rotationSpeedMultiplier: 1500
   pitchSpeedMultiplier: 1500
@@ -806,6 +805,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 296443519}
+  - {fileID: 89801096}
   m_Father: {fileID: 421194531}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1276,7 +1276,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 296443519}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1439583196
 GameObject:
