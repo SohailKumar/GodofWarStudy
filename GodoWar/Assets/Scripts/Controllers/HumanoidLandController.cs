@@ -38,6 +38,11 @@ public class HumanoidLandController : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        playerModelTransform.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
+    }
+
     private Vector3 GetLookInput()
     {
         previousPlayerLookInput = playerLookInput;
@@ -51,7 +56,7 @@ public class HumanoidLandController : MonoBehaviour
 
         if (input.moveIsPressed)
         {
-            playerModelTransform.rotation = transform.rotation * Quaternion.LookRotation(playerMoveInput);
+            playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, transform.rotation * Quaternion.LookRotation(playerMoveInput), 0.3f);
         }
     }
 
@@ -75,6 +80,5 @@ public class HumanoidLandController : MonoBehaviour
                                        playerMoveInput.y,
                                        playerMoveInput.z * movementMultiplier));
         rb.AddRelativeForce(playerMoveInput, ForceMode.Force);
-        playerModelTransform.position = new Vector3(transform.position.x, transform.position.y-1.5f, transform.position.z);
     }
 }

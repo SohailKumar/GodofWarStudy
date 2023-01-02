@@ -637,7 +637,7 @@ MonoBehaviour:
   input: {fileID: 1868095391}
   playerMoveInput: {x: 0, y: 0, z: 0}
   playerLookInputLerpTime: 0.35
-  playerModelTransform: {fileID: 0}
+  playerModelTransform: {fileID: 89801096}
   movementMultiplier: 2400
   rotationSpeedMultiplier: 1500
   pitchSpeedMultiplier: 1500
