@@ -4,18 +4,21 @@ public class HumanoidLandController : MonoBehaviour
 {
     public Transform CameraFollow;
 
+    [SerializeField] GameObject playerModel;
+    Transform playerModelTransform;
+    Animator playerAnimator;
+
     Rigidbody rb;
     
     [SerializeField] HumanoidLandInput input;
 
-    [SerializeField] Vector3 playerMoveInput;
+    Vector3 playerMoveInput;
 
     Vector3 playerLookInput;
     Vector3 previousPlayerLookInput;
     float cameraPitch;
     [SerializeField] float playerLookInputLerpTime = 0.35f;
-
-    [SerializeField] Transform playerModelTransform;
+    [SerializeField] float playerRotationSlerpTime = 0.3f;
 
     [Header("Movement")]
     [SerializeField] float movementMultiplier = 30.0f;
@@ -25,6 +28,8 @@ public class HumanoidLandController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerModelTransform = playerModel.transform;
+        playerAnimator = playerModel.GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -35,12 +40,14 @@ public class HumanoidLandController : MonoBehaviour
 
         playerMoveInput = GetMoveInput();
         PlayerMove();
-        
+
+        playerModelTransform.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
+        playerAnimator.SetBool("running", input.moveIsPressed);
     }
 
     private void Update()
     {
-        playerModelTransform.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
+        
     }
 
     private Vector3 GetLookInput()
@@ -56,7 +63,7 @@ public class HumanoidLandController : MonoBehaviour
 
         if (input.moveIsPressed)
         {
-            playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, transform.rotation * Quaternion.LookRotation(playerMoveInput), 0.3f);
+            playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, Quaternion.LookRotation(transform.rotation * playerMoveInput), playerRotationSlerpTime);
         }
     }
 
