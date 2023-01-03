@@ -636,11 +636,11 @@ MonoBehaviour:
   CameraFollow: {fileID: 1308277013}
   playerModel: {fileID: 89801095}
   input: {fileID: 1868095391}
-  playerLookInputLerpTime: 0.2
+  playerLookInputLerpTime: 0.3
   playerRotationSlerpTime: 0.3
   movementMultiplier: 2400
-  rotationSpeedMultiplier: 1000
-  pitchSpeedMultiplier: 1200
+  rotationSpeedMultiplier: 400
+  pitchSpeedMultiplier: 350
 --- !u!136 &296443521
 CapsuleCollider:
   m_ObjectHideFlags: 0

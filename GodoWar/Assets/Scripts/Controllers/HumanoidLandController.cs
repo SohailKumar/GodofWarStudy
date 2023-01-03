@@ -27,6 +27,11 @@ public class HumanoidLandController : MonoBehaviour
 
     private void Awake()
     {
+        #if UNITY_EDITOR
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 60;
+        #endif
+
         rb = GetComponent<Rigidbody>();
         playerModelTransform = playerModel.transform;
         playerAnimator = playerModel.GetComponent<Animator>();
