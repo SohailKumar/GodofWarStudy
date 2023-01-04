@@ -12,7 +12,7 @@ public class HumanoidLandController : MonoBehaviour
     
     [SerializeField] HumanoidLandInput input;
 
-    Vector3 playerMoveInput;
+    [SerializeField] Vector3 playerMoveInput;
 
     Vector3 playerLookInput;
     Vector3 previousPlayerLookInput;
@@ -47,12 +47,9 @@ public class HumanoidLandController : MonoBehaviour
         PlayerMove();
 
         playerModelTransform.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
-        playerAnimator.SetBool("running", input.moveIsPressed);
-    }
-
-    private void Update()
-    {
-        
+        //playerAnimator.SetBool("running", input.moveIsPressed);
+        playerAnimator.SetFloat("dirZ", playerMoveInput.z);
+        playerAnimator.SetFloat("dirX", playerMoveInput.x);
     }
 
     private Vector3 GetLookInput()
@@ -68,7 +65,8 @@ public class HumanoidLandController : MonoBehaviour
 
         if (input.moveIsPressed)
         {
-            playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, Quaternion.LookRotation(transform.rotation * playerMoveInput), playerRotationSlerpTime);
+            playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, transform.rotation, playerRotationSlerpTime);
+            //playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, Quaternion.LookRotation(transform.rotation * playerMoveInput), playerRotationSlerpTime);
         }
     }
 

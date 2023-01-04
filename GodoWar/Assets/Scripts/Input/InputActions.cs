@@ -44,6 +44,24 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PrepThrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""744b0f7b-95ec-450c-9e02-cee3be529862"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""50256057-04d5-47e3-b6e2-ee98cdc2f674"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +152,50 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f366a8b-c649-4a05-97a9-6e6366af38a9"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrepThrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41eba3aa-452e-40b1-8b48-1d5d1f099035"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrepThrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9901cd0a-27e8-4fad-baae-ee804caff578"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7032b858-871d-4e0c-88bb-39156e711c11"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +206,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_HumanoidLand = asset.FindActionMap("HumanoidLand", throwIfNotFound: true);
         m_HumanoidLand_Move = m_HumanoidLand.FindAction("Move", throwIfNotFound: true);
         m_HumanoidLand_Look = m_HumanoidLand.FindAction("Look", throwIfNotFound: true);
+        m_HumanoidLand_PrepThrow = m_HumanoidLand.FindAction("PrepThrow", throwIfNotFound: true);
+        m_HumanoidLand_Attack = m_HumanoidLand.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,12 +269,16 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private IHumanoidLandActions m_HumanoidLandActionsCallbackInterface;
     private readonly InputAction m_HumanoidLand_Move;
     private readonly InputAction m_HumanoidLand_Look;
+    private readonly InputAction m_HumanoidLand_PrepThrow;
+    private readonly InputAction m_HumanoidLand_Attack;
     public struct HumanoidLandActions
     {
         private @InputActions m_Wrapper;
         public HumanoidLandActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_HumanoidLand_Move;
         public InputAction @Look => m_Wrapper.m_HumanoidLand_Look;
+        public InputAction @PrepThrow => m_Wrapper.m_HumanoidLand_PrepThrow;
+        public InputAction @Attack => m_Wrapper.m_HumanoidLand_Attack;
         public InputActionMap Get() { return m_Wrapper.m_HumanoidLand; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -226,6 +294,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnLook;
+                @PrepThrow.started -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnPrepThrow;
+                @PrepThrow.performed -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnPrepThrow;
+                @PrepThrow.canceled -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnPrepThrow;
+                @Attack.started -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_HumanoidLandActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_HumanoidLandActionsCallbackInterface = instance;
             if (instance != null)
@@ -236,6 +310,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @PrepThrow.started += instance.OnPrepThrow;
+                @PrepThrow.performed += instance.OnPrepThrow;
+                @PrepThrow.canceled += instance.OnPrepThrow;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -244,5 +324,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnPrepThrow(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
